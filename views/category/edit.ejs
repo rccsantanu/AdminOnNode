@@ -1,0 +1,109 @@
+<%- include ("../partials/left") %>
+
+  <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><%= viewTitle %></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
+              <li class="breadcrumb-item"><a href="/category/index">Category</a></li>
+              <li class="breadcrumb-item active">Category Add</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <form action="/category/edit" method="POST"  >
+        <input type="text" name="_id" value="<%= category._id %>">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Create Category</h3>
+
+            </div>
+
+            
+            
+            <div class="card-body">
+                <div class="form-group">
+                  <label for="inputStatus">Category</label>
+                  <select class="form-control custom-select" name="parent">
+                    <option value="/">root</option>
+                    <% if(maincat.length > 0 ) { %>
+                    <% maincat.forEach(function(maincats) { %>
+                      <option value="<%= maincats.name %>" <% if(maincats.name ==  category.parent ) { %> selected="selected" <% } %>><%= maincats.name %></option>
+                    <% }); %>
+                    <% } %>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName"> Name</label>
+                  <input type="text" id="inputName" name="name" class="form-control" 
+                         value="<%= typeof category.name != 'undefined' ? category.name : '' %>" >
+                  <div class="text-danger"><%= typeof category.nameError != 'undefined' ? category.nameError : '' %></div> 
+                </div>
+               
+
+                <div class="form-group">
+                  <label for="inputName"> Slug</label>
+                  <input type="text" id="inputName" name="slug" class="form-control" 
+                        value="<%= typeof category.slug != 'undefined' ? category.slug : '' %>">
+                  <div class="text-danger"><%= typeof category.slugError != 'undefined' ? category.slugError : '' %></div> 
+                </div>
+
+                <div class="form-group">
+                  <label for="inputDescription"> Description</label>
+                  <textarea id="inputDescription" name="description" class="form-control" rows="4"><%= typeof category.description != 'undefined' ? category.description : '' %></textarea>
+                </div>
+
+
+                  <div class="form-group">
+                  <label for="inputStatus">Status</label>
+                  <select class="form-control custom-select" name="status">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+
+           
+             
+            </div>
+            
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success float-right">Edit Category</button>
+        </div>
+      </div>
+    </form>  
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <%- include ("../partials/footer") %>
+
+ 
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+

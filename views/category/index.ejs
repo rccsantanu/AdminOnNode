@@ -1,0 +1,123 @@
+<%- include ("../partials/left") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Category</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
+              <li class="breadcrumb-item active">Category</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+
+      <% if(typeof messages != 'undefined' &&  messages !=''){ %>
+        <div class="alert alert-success" role="alert">
+            <%= messages %>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+   
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <!-- <h3 class="card-title">Category listing</h3> -->
+          
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-10">
+                <h3 class="card-title">Category listing</h3>
+              </div>
+              <div class="col-sm-2">
+                <a href="/category/create" class="btn btn-block btn-success" style="float:right;"> Add Category </a>
+              </div>
+            </div>
+          </div>
+       
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-hover" id="datatable">
+              <thead>
+                  <tr>
+                      
+                      <th style="width: 20%">
+                          Name
+                      </th>
+                      <th style="width: 30%">
+                          Parent
+                      </th>
+                      <th>
+                          Slug
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Status
+                      </th>
+                      <th style="width: 20%">
+                         Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                 <% category.forEach(function(categories) { %>
+                  <tr>
+                      
+                      <td><%= categories.name %></td>
+                      <td><%= categories.parent %></td>
+                      <td ><%= categories.slug %></td>
+                      <td class="project-state">
+                        <% if(categories.status == 'Active'){ %>
+                           <span class="badge badge-success"><%= categories.status %></span>
+                        <% }else{ %>
+                          <span class="badge badge-danger"><%= categories.status %></span>
+                        <% } %>
+                        
+                      </td>
+                      <td class="project-actions text-right">
+                          <!-- <a class="btn btn-primary btn-sm" href="#">
+                              <i class="fas fa-folder">
+                              </i>
+                              View
+                          </a> -->
+                          <a class="btn btn-info btn-sm" href="edit/<%= categories._id %>">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Edit
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="delete/<%= categories._id %>" onclick="return confirm('Are you sure to delete this record ?');">
+                              <i class="fas fa-trash">
+                              </i>
+                              Delete
+                          </a>
+                      </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%- include ("../partials/footer") %>
+
+
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+

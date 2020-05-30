@@ -1,0 +1,77 @@
+<div class="register-box">
+  <div class="register-logo">
+    <a href=""><b>Administrator Signup</a>
+  </div>
+
+  <div class="card">
+     
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Register a new membership</p>
+       
+     
+      
+      <% if(typeof messages != 'undefined' &&  messages !=''){ %>
+      <div class="alert alert-success" role="alert">
+          <%= messages %>
+      </div>
+      <% } %>
+     
+
+      <form action="/register" method="POST" autocomplete="off" >
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="fullname" placeholder="Full name" value="<%= typeof user.fullname != 'undefined' ? user.fullname : '' %>">
+           
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+         <div class="text-danger"><%= typeof user.fullnameError != 'undefined' ? user.fullnameError : '' %></div> 
+        
+            
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" placeholder="Email" value="<%= typeof user.email != 'undefined' ? user.email : '' %>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-danger"><%= typeof user.emailError != 'undefined' ? user.emailError : '' %></div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" name="password" value="<%= typeof user.password != 'undefined' ? user.password : '' %>">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-danger"><%= typeof user.passwordError != 'undefined' ? user.passwordError : '' %></div> 
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Retype password" name="confirm_password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+         <div class="text-danger"><%= typeof user.confirm_passwordError != 'undefined' ? user.confirm_passwordError : '' %></div> 
+        <div class="row">
+      
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+           
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+  
+
+      <a href="/" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>

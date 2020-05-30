@@ -1,0 +1,157 @@
+<%- include ("../partials/left") %>
+
+  <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><%= viewTitle %></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
+              <li class="breadcrumb-item"><a href="/project/index">Project</a></li>
+              <li class="breadcrumb-item active">Project Edit</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+      <% if(typeof messages != 'undefined' &&  messages !=''){ %>
+        <div class="alert alert-success" role="alert">
+            <%= messages %>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <form action="/project/edit" method="POST"  >
+        <input type="text" name="_id" value="<%= project._id %>">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">Project Name</label>
+                <input type="text" id="inputName" name="project_name" class="form-control"
+                       value="<%= typeof project.project_name != 'undefined' ? project.project_name : '' %>">
+                <div class="text-danger"><%= typeof project.project_nameError != 'undefined' ? project.project_nameError : '' %></div> 
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Project Description</label>
+                <textarea id="inputDescription" class="form-control" rows="4" name="project_description"><%= typeof project.project_description != 'undefined' ? project.project_description : '' %></textarea>
+                <div class="text-danger"><%= typeof project.project_descriptionError != 'undefined' ? project.project_descriptionError : '' %></div> 
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">Status</label>
+                <select class="form-control custom-select" name="status">
+                  <option  value="Pre Sale" <% if(project.status ==  'Pre Sale' ) { %> selected="selected" <% } %>>Pre Sale</option>
+                  <option value="On Hold" <% if(project.status ==  'On Hold' ) { %> selected="selected" <% } %>>On Hold</option>
+                  <option value="Processing" <% if(project.status ==  'Processing' ) { %> selected="selected" <% } %>>Processing</option>
+                  <option value="Canceled" <% if(project.status ==  'Canceled' ) { %> selected="selected" <% } %>>Canceled</option>
+                  <option value="Success" <% if(project.status ==  'Success' ) { %> selected="selected" <% } %>>Success</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Client Company</label>
+                <input type="text" id="inputName" name="client_company" class="form-control"
+                       value="<%= typeof project.client_company != 'undefined' ? project.client_company : '' %>">
+               <div class="text-danger"><%= typeof project.client_companyError != 'undefined' ? project.client_companyError : '' %></div> 
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Notes</label>
+                <textarea id="inputDescription"  name="project_notes" class="form-control" rows="4"><%= typeof project.project_notes != 'undefined' ? project.project_notes : '' %></textarea>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Budget</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Estimated budget</label>
+                <input type="text" id="inputName" name="estimated_budget" class="form-control"
+                       value="<%= typeof project.estimated_budget != 'undefined' ? project.estimated_budget : '' %>">
+               <div class="text-danger"><%= typeof project.estimated_budgetError != 'undefined' ? project.estimated_budgetError : '' %></div> 
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">Total amount spent</label>
+                <textarea id="inputDescription"  name="amount_spent" class="form-control" rows="4" ><%= typeof project.amount_spent != 'undefined' ? project.amount_spent : '' %></textarea>
+              </div>
+              <div class="form-group">
+                <label for="inputEstimatedDuration">Estimated project duration</label>
+                <input type="text" id="inputName" name="project_duration" class="form-control"
+                       value="<%= typeof project.project_duration != 'undefined' ? project.project_duration : '' %>">
+               <div class="text-danger"><%= typeof project.project_durationError != 'undefined' ? project.project_durationError : '' %></div> 
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
+
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Team Member</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputStatus">Members</label>
+              
+
+                <%
+                if(typeof project1 != 'undefined' &&  project1 !=''){ %>
+                  
+                <% project1.teammember.forEach(function(team) { %><%= team.fullname %> <a href="/project/teammembersdelete/<%= project._id %>/<%= team._id %>"><i class="nav-icon fas fa-trash"></i></a>&nbsp;&nbsp;<% }) %>
+                <% } else{ %>
+                  <% project.teammember.forEach(function(team) { %><%= team.fullname %> <a href="/project/teammembersdelete/<%= project._id %>/<%= team._id %>"><i class="nav-icon fas fa-trash"></i></a>&nbsp;&nbsp;<% }) %>
+                  <% } %>
+                
+                <select class="select2"  name="teammember[]" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                  
+                  <% if(employee.length > 0 ) { %>
+                    <% employee.forEach(function(emp) { %>
+                      <option value="<%= emp._id %>" ><%= emp.fullname %> - <%= emp.user_type %></option>
+                    <% }); %>
+                    <% } %>
+                </select>
+               
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+        
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Edit Porject" class="btn btn-success float-right">
+        </div>
+      </div>
+      </form>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <%- include ("../partials/footer") %>
+
+ 
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+

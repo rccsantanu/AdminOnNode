@@ -1,0 +1,121 @@
+<%- include ("../partials/left") %>
+
+  <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><%= viewTitle %></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
+              <li class="breadcrumb-item"><a href="/employee/index">Employee</a></li>
+              <li class="breadcrumb-item active">Employee Add</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <form action="/employee/create" method="POST" encType="multipart/form-data" >
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Create Employee</h3>
+
+            </div>
+
+            
+            
+            <div class="card-body">
+                <div class="form-group">
+                  <label for="inputName"> Name</label>
+                  <input type="text" id="inputName" name="fullname" class="form-control" 
+                        value="<%= typeof employee.fullname != 'undefined' ? employee.fullname : '' %>" >
+                  <div class="text-danger"><%= typeof employee.fullnameError != 'undefined' ? employee.fullnameError : '' %></div> 
+                </div>
+                <div class="form-group">
+                  <label for="inputStatus">Type</label>
+                  <select class="form-control custom-select" name="user_type">
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Architect">Architect</option>
+                    <option value="Team Leader">Team Leader</option>
+                    <option value="Senior Developer">Senior Developer</option>
+                    <option value="Senior Designer">Senior Designer</option>
+                    <option value="Junior Developer">Junior Developer</option>
+                    <option value="Trainee">Trainee</option>
+                    <option value="System">System</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName"> Employee Id</label>
+                  <input type="text" id="inputName" name="emp_id" class="form-control" 
+                        value="<%= typeof employee.emp_id != 'undefined' ? employee.emp_id : '' %>">
+                  <div class="text-danger"><%= typeof employee.emp_idError != 'undefined' ? employee.emp_idError : '' %></div> 
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName"> Email </label>
+                  <input type="text" id="inputName" name="email" class="form-control" 
+                        value="<%= typeof employee.email != 'undefined' ? employee.email : '' %>">
+                  <div class="text-danger"><%= typeof employee.emailError != 'undefined' ? employee.emailError : '' %></div> 
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName"> Mobile </label>
+                  <input type="text" id="inputName" name="mobile" class="form-control" 
+                        value="<%= typeof employee.mobile != 'undefined' ? employee.mobile : '' %>">
+                  <div class="text-danger"><%= typeof employee.mobileError != 'undefined' ? employee.mobileError : '' %></div> 
+                </div>
+
+                <div class="form-group">
+                  <label for="inputDescription"> Address</label>
+                  <textarea id="inputDescription" name="address" class="form-control" rows="4"><%= typeof employee.address != 'undefined' ? employee.address : '' %></textarea>
+                </div>
+
+               <div class="form-group">
+                  <label for="inputStatus">Status</label>
+                  <select class="form-control custom-select" name="status">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+
+           
+             
+            </div>
+            
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success float-right">Create new Employee</button>
+        </div>
+      </div>
+    </form>  
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <%- include ("../partials/footer") %>
+
+ 
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+
