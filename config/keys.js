@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.connect(
-  "mongodb://localhost:27017/restapi2ndapp",
+  "mongodb+srv://basant_admin:kv5dSIA4UK51AzRp@cluster0-ipolq.mongodb.net/AdminOnNode?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
