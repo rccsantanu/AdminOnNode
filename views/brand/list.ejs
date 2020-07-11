@@ -1,0 +1,175 @@
+<%- include ("../partials/left") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Project</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
+              <li class="breadcrumb-item active">Brand</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+
+      <% if(typeof messages != 'undefined' &&  messages !=''){ %>
+        <div class="alert alert-success" role="alert">
+            <%= messages %>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+   
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <!-- <h3 class="card-title">Category listing</h3> -->
+          
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-10">
+                <h3 class="card-title">Brand listing</h3>
+              </div>
+              <div class="col-sm-2">
+                <a href="/brand/create" class="btn btn-block btn-success" style="float:right;"> Add Brand </a>
+              </div>
+            </div>
+          </div>
+       
+        </div>
+        <div class="card-body">
+          <form action="/brand/list" method="get"  >
+            
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6">&nbsp;</div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                          <input type="text" id="inputName" name="search" class="form-control" 
+                          value="<%= typeof search != 'undefined' ? search : '' %>" placeholder="search" >
+                    </div>
+                  </div>
+                  <div class="col-sm-1">
+                    <button type="submit" class="btn btn-info float-right">Search</button>
+                  </div>
+                  <div class="col-sm-1">
+                      <a href="/brand/list" class="nav-link">Reset</a>
+                  </div>
+                </div>
+              </div>
+          </form>
+          <table class="table table-bordered table-hover" >
+              <thead>
+                  <tr>
+                      
+                      <th style="width: 20%">
+                       # Brand Name 
+                        <% if(!search) { %>
+                           <a href="/brand/list/<%=current %>/desc_name">^</a> |  <a href="/brand/list/<%=current %>/asc_name">V</a>
+                        <% } %>
+                      </th>
+
+                      <th style="width: 8%" class="text-center">
+                          Status 
+                          <% if(!search) { %>
+                            <a href="/brand/list/<%=current %>/desc_status">^</a> |  <a href="/brand/list/<%=current %>/asc_status">V</a>
+                          <% } %>
+                      </th>
+                      <th style="width: 20%">
+                         Action
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                
+
+              
+                 <% brand.forEach(function(brands) {%>
+                  <tr>
+                      
+                      <td># <%= brands.brand_name  %></td>
+                      <td class="project-state">
+                        <% if(brands.status == 'active'){ %>
+                           <span class="badge badge-primary"><%= brands.status %></span>
+                        <% } %>
+ 
+                        <% if(brands.status == 'inactive'){ %>
+                          <span class="badge badge-danger"><%= brands.status %></span>
+                        <% } %>
+                        
+                        
+                      </td>
+                      <td class="project-actions text-right">
+
+                          <a class="btn btn-info btn-sm" href="edit/<%= brands._id %>">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Edit
+                          </a>
+                       
+                      </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+          </table>
+
+          <p>&nbsp;</p>
+
+          <% if(!search) { %>
+          <nav aria-label="Page navigation example">
+          <% if (pages > 0 ) { %>
+            <ul class="pagination justify-content-end">
+                <% if (current == 1) { %>
+                    <li class="page-link disabled"><a>First</a></li>
+                <% } else { %>
+                    <li ><a class="page-link" href="/brand/list/1/<%=setOrder %>">First</a></li>
+                <% } %>
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (i !== 1) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="page-link active"><a><%= i %></a></li>
+                    <% } else { %>
+                        <li><a class="page-link" href="/brand/list/<%= i %>/<%=setOrder %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="page-link disabled"><a>...</a></li>
+                    <% } %>
+                <% } %>
+                <% if (current == pages) { %>
+                    <li class="page-link disabled"><a>Last</a></li>
+                <% } else { %>
+                    <li><a class="page-link" href="/brand/list/<%= pages %>/<%=setOrder %>">Last</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+      </nav>
+      <% } %>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%- include ("../partials/footer") %>
+
+
+  <!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+

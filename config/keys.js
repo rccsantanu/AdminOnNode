@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/nodeAdmindb',{
+mongoose.connect('mongodb://localhost:27017/restapi2ndapp',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true

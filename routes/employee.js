@@ -7,7 +7,7 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const employeeController    = require('../controllers/employeeController');
 
 // GET employee listing page
-router.get('/employee/index', ensureAuthenticated, employeeController.index);
+router.get('/employee/index', ensureAuthenticated, employeeController.list);
 
 // GET employee create page
 router.get('/employee/create', ensureAuthenticated, employeeController.create);
@@ -16,10 +16,10 @@ router.get('/employee/create', ensureAuthenticated, employeeController.create);
 router.post('/employee/create', ensureAuthenticated, employeeController.savepost);
 
 // GET employee edit page
-router.get('/employee/edit/:id', ensureAuthenticated, employeeController.edit);
+//router.get('/employee/edit/:id', ensureAuthenticated, employeeController.edit);
 
 // POST request for employee edit
-router.post('/employee/edit', ensureAuthenticated, employeeController.editpost);
+//router.post('/employee/edit', ensureAuthenticated, employeeController.editpost);
 
 // // delete rcategory
 // router.get('/category/delete/:id', ensureAuthenticated, categoryController.delete);
