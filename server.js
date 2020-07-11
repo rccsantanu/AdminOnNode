@@ -5,6 +5,7 @@ const path = require('path');
 const bodyparser = require('body-parser');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
+const dotenv = require('dotenv');  // for environment variable (.env)
 
 //// for flash messag  ////////////////
 const session = require('express-session');
@@ -12,14 +13,17 @@ const flash = require('connect-flash');
 
 const app = express();
 
+// for .env file
+dotenv.config();
+
 // passport config
 require('./config/passport')(passport);
 
 // bodyparser for form
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
     extended: true
 }));
-app.use(bodyparser.json());
 
 
 // EJS
@@ -29,7 +33,7 @@ app.set('view engine', 'ejs');
 // express session
 app.use(session({
     secret: 'santanu',
-    cookie: { maxAge: 6000000000000 },
+    cookie: { maxAge: 600000000000000000000000000000000000000000000000 },
     resave: false,
     saveUninitialized: false,
     }));
@@ -54,7 +58,7 @@ app.use('/public',express.static(path.join(__dirname,'/static588/')));
 require('./config/keys');
 
 // connection
-const PORT = process.env.PORT || 3012;
+const PORT =  3019;
 app.listen(PORT, () => {
     console.log(`Express server started at port : ${PORT}`);
 });
@@ -64,4 +68,5 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/category'));
 app.use('/', require('./routes/employee'));
 app.use('/', require('./routes/project'));
+app.use('/', require('./routes/brand'));
 

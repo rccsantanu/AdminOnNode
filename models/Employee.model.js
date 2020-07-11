@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 //const bcrypt = require('bcryptjs');
 
 var EmployeeSchema = new mongoose.Schema({
-    fullname: {type: String, 
-        required: [true, "can't be blank"], 
+    fullname: {
+        type: String, 
+        required: [true, "can't be blank1234"], 
     },
     email: {
         type: String,
