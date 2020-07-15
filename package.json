@@ -31,5 +31,6 @@
   "bugs": {
     "url": "https://github.com/rccsantanu/AdminOnNode/issues"
   },
-  "homepage": "https://github.com/rccsantanu/AdminOnNode#readme"
+  "homepage": "https://github.com/rccsantanu/AdminOnNode#readme",
+  "devDependencies": {}
 }

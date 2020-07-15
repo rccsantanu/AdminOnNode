@@ -23,6 +23,12 @@ router.get("/brand/edit/:id", ensureAuthenticated, brandController.edit);
 // POST request for brand edit
 router.post("/brand/edit", ensureAuthenticated, brandController.editpost);
 
+router.delete(
+  "/brand/delete/:id",
+  ensureAuthenticated,
+  brandController.deleteBrand
+);
+
 // GET request for brand search
 router.post("/brand/search", ensureAuthenticated, brandController.search);
 
