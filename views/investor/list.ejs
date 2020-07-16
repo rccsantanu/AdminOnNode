@@ -12,7 +12,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/dashboard/index">Home</a></li>
-            <li class="breadcrumb-item active">Brand</li>
+            <li class="breadcrumb-item active">Investor</li>
           </ol>
         </div>
       </div>
@@ -36,15 +36,15 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-10">
-              <h3 class="card-title">Brand listing</h3>
+              <h3 class="card-title">Investor listing</h3>
             </div>
             <div class="col-sm-2">
               <a
-                href="/brand/create"
+                href="/investor/create"
                 class="btn btn-block btn-success"
                 style="float:right;"
               >
-                Add Brand
+                Add Investor
               </a>
             </div>
           </div>
@@ -82,7 +82,7 @@
           <thead>
             <tr>
               <th style="width: 20%">
-                # Brand Name <% if(!search) { %>
+                # Investor Name <% if(!search) { %>
                 <a href="/brand/list/<%=current %>/desc_name">^</a> |
                 <a href="/brand/list/<%=current %>/asc_name">V</a>
                 <% } %>
@@ -102,7 +102,7 @@
             </tr>
           </thead>
           <tbody>
-            <% brand.forEach(function(brands) {%>
+            <% if(result > 0) { %> <% brand.forEach(function(brands) {%>
             <tr>
               <td># <%= brands.brand_name %></td>
               <td class="project-state">
@@ -125,51 +125,15 @@
               </td>
               <% } %>
             </tr>
-            <% }); %>
+            <% }); %> <% } else { %>
+            <tr>
+              <td colspan="3">No results found!</td>
+            </tr>
+            <% } %>
           </tbody>
         </table>
 
         <p>&nbsp;</p>
-
-        <% if(!search) { %>
-        <nav aria-label="Page navigation example">
-          <% if (pages > 0 ) { %>
-          <ul class="pagination justify-content-end">
-            <% if (current == 1) { %>
-            <li class="page-link disabled"><a>First</a></li>
-            <% } else { %>
-            <li>
-              <a class="page-link" href="/brand/list/1/<%=setOrder %>">First</a>
-            </li>
-            <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1)
-            %> <% if (i !== 1) { %>
-            <li class="disabled"><a>...</a></li>
-            <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) {
-            %> <% if (i == current) { %>
-            <li class="page-link active"><a><%= i %></a></li>
-            <% } else { %>
-            <li>
-              <a class="page-link" href="/brand/list/<%= i %>/<%=setOrder %>"
-                ><%= i %></a
-              >
-            </li>
-            <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
-            <li class="page-link disabled"><a>...</a></li>
-            <% } %> <% } %> <% if (current == pages) { %>
-            <li class="page-link disabled"><a>Last</a></li>
-            <% } else { %>
-            <li>
-              <a
-                class="page-link"
-                href="/brand/list/<%= pages %>/<%=setOrder %>"
-                >Last</a
-              >
-            </li>
-            <% } %>
-          </ul>
-          <% } %>
-        </nav>
-        <% } %>
       </div>
       <!-- /.card-body -->
     </div>

@@ -1,17 +1,20 @@
 module.exports = {
+  secret: "eypZAZy0CY^g9%KreypZAZy0CY^g9%Kr"
+};
+module.exports = {
   ensureAuthenticated: function(req, res, next) {
     if (req.isAuthenticated()) {
       return next();
-     // next();
+      // next();
     }
-    req.flash('error_msg', 'Please log in to view that resource');
-    res.redirect('/login');
+    req.flash("error_msg", "Please log in to view that resource");
+    res.redirect("/login");
   },
   forwardAuthenticated: function(req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
-    //  next();
+      //  next();
     }
-   // res.redirect('/dashboard/index');      
+    // res.redirect('/dashboard/index');
   }
 };

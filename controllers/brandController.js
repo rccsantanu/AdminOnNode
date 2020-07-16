@@ -67,6 +67,7 @@ class BrandController extends BaseController {
             current: page,
             pages: Math.ceil(count / perPage),
             search: req.query.search,
+            user: JSON.parse(JSON.stringify(req.user)),
             setOrder: setOrder,
             cssClass: "hold-transition sidebar-mini layout-fixed",
             messages: req.flash("message"),
@@ -81,8 +82,10 @@ class BrandController extends BaseController {
    * @method  Request  GET
    */
   create = (req, res) => {
+    console.log(res);
     res.render("./brand/create", {
       viewTitle: "Brand Add",
+      user: JSON.parse(JSON.stringify(req.user)),
       cssClass: "hold-transition sidebar-mini layout-fixed",
       brand: req.body
     });

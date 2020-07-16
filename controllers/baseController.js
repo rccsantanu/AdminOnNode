@@ -1,6 +1,6 @@
 class BaseController {
   formErr(err) {
-    console.log(err);
+    // console.log(err);
     let validationErrors = [];
     let field;
     for (field in err.errors) {

@@ -73,3 +73,4 @@ app.use("/", require("./routes/category"));
 app.use("/", require("./routes/employee"));
 app.use("/", require("./routes/project"));
 app.use("/", require("./routes/brand"));
+app.use("/", require("./routes/investor"));

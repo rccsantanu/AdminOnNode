@@ -20,6 +20,9 @@
       <div class="info">
         <a href="#" class="d-block"><%= user.fullname %></a>
       </div>
+      <div class="info-right">
+        <a href="/logout">Logout</a>
+      </div>
     </div>
 
     <!-- Sidebar Menu -->
@@ -128,6 +131,27 @@
               <a href="/brand/create" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Add</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- Investor -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Investor<i class="fas fa-angle-left right"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/investor/list" class="nav-link">
+                <i class="far fas fa-list nav-icon"></i>
+                <p>List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/investor" class="nav-link">
+                <i class="far fas fa-plus nav-icon"></i>
+                <p>Create</p>
               </a>
             </li>
           </ul>

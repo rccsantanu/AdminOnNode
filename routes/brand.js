@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
-
+const authController = require("../controllers/authController");
 const brandController = require("../controllers/brandController");
 
 // GET request for brand listing page
@@ -12,7 +12,12 @@ router.get(
 );
 
 // GET request for brand createtion page
-router.get("/brand/create", ensureAuthenticated, brandController.create);
+router.get(
+  "/brand/create",
+  ensureAuthenticated,
+  authController.roleAuthorization(["admin"]),
+  brandController.create
+);
 
 // POST request for brand creation
 router.post("/brand/create", ensureAuthenticated, brandController.savepost);
